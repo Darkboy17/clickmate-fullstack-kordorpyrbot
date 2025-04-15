@@ -30,14 +30,14 @@ export const SocketProvider = ({ children }) => {
     // Listen for the 'connect' and 'disconnect' events
     // and update the connection status accordingly
     socketInstance.on('connect', () => {
-      console.log('Socket connected');
+      //console.log('Socket connected');
       setIsConnected(true);
     });
 
     // Listen for the 'disconnect' event and update the connection status
     // accordingly
     socketInstance.on('disconnect', () => {
-      console.log('Socket disconnected');
+      //console.log('Socket disconnected');
       setIsConnected(false);
     });
 
@@ -45,7 +45,7 @@ export const SocketProvider = ({ children }) => {
     // accordingly
     socketInstance.on('seller-count', (count) => {
 
-      console.log('Seller count update:', count);
+      //console.log('Seller count update:', count);
 
       setSellerCount(count);
 
@@ -74,7 +74,7 @@ export const SocketProvider = ({ children }) => {
 
           setIsSeller(true);
 
-          console.log('Joined seller room:', response.message);
+          //console.log('Joined seller room:', response.message);
 
         }
       });
@@ -94,7 +94,7 @@ export const SocketProvider = ({ children }) => {
 
           setIsSeller(false);
 
-          console.log('Left seller room:', response.message);
+          // console.log('Left seller room:', response.message);
 
         }
 
@@ -106,15 +106,15 @@ export const SocketProvider = ({ children }) => {
 
 
   return (
-    <SocketContext.Provider 
+    <SocketContext.Provider
 
-      value={{ 
+      value={{
 
-        socket, 
+        socket,
 
-        isConnected, 
+        isConnected,
 
-        isSeller, 
+        isSeller,
 
         sellerCount,
 

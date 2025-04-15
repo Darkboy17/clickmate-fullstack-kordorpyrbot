@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSocket } from '../context/SocketContext';
 
-const OrderNotifications = () => {
-  const { socket, isConnected, isSeller, sellerCount, joinAsSeller, leaveSellerRoom } = useSocket();
+const OrderNotifications = ( {products, onSellerModeChange} ) => {
+  const { socket, isSeller, sellerCount, joinAsSeller, leaveSellerRoom } = useSocket();
   const [orders, setOrders] = useState([]);
   const [blinkingOrderId, setBlinkingOrderId] = useState(null);
   const [isVisible, setIsVisible] = useState(true);
@@ -13,8 +13,16 @@ const OrderNotifications = () => {
     // Listen for new orders (only sellers will receive these due to room)
     socket.on('new-order', (order) => {
 
+      const productMatchingOrder = products.filter( product => product.id === order.productId);
+
       // Check if the order is already in the list
-      setOrders((prevOrders) => [order, ...prevOrders].slice(0, 10));
+      setOrders((prevOrders) => [
+        {
+          ...order,
+          price: productMatchingOrder.length > 0 ? productMatchingOrder[0].price : 'N/A',
+        },
+        ...prevOrders,
+      ].slice(0, 10));
 
       // Start blinking for this specific order
       setBlinkingOrderId(order.id);
@@ -38,7 +46,6 @@ const OrderNotifications = () => {
 
   // Blinking effect for the order notification
   useEffect(() => {
-
     // If no order is blinking, do nothing
     if (!blinkingOrderId) return;
 
@@ -62,8 +69,10 @@ const OrderNotifications = () => {
   const handleToggleSeller = () => {
     if (isSeller) {
       leaveSellerRoom();
+      onSellerModeChange(!isSeller)
     } else {
       joinAsSeller();
+      onSellerModeChange(!isSeller)
     }
   };
 
@@ -75,8 +84,8 @@ const OrderNotifications = () => {
         <button
           onClick={handleToggleSeller}
           className={`px-3 py-1 text-xs rounded-full transition-colors ${isSeller
-              ? 'bg-amber-100 text-amber-800 border border-amber-300'
-              : 'bg-gray-100 text-gray-800 border border-gray-300'
+            ? 'bg-amber-100 text-amber-800 border border-amber-300'
+            : 'bg-gray-100 text-gray-800 border border-gray-300'
             }`}
         >
           {isSeller ? 'Seller Mode Active' : 'Join as Seller'}
@@ -94,8 +103,8 @@ const OrderNotifications = () => {
               <div
                 key={order.id}
                 className={`p-4 transition-all ${blinkingOrderId === order.id
-                    ? (isVisible ? 'opacity-100 bg-green-100' : 'opacity-30 bg-green-50')
-                    : 'opacity-100 bg-white'
+                  ? (isVisible ? 'opacity-100 bg-green-100' : 'opacity-30 bg-green-50')
+                  : 'opacity-100 bg-white'
                   }`}
               >
                 <div className="flex justify-between">
@@ -108,7 +117,7 @@ const OrderNotifications = () => {
                   <div className="text-gray-600">Product: <span className="text-gray-800">{order.productId}</span></div>
                   <div className="text-gray-600">Quantity: <span className="text-gray-800">{order.quantity}</span></div>
                   <div className="text-gray-600">Buyer: <span className="text-gray-800">{order.buyer}</span></div>
-                  <div className="text-gray-600">Total: <span className="text-amber-700 font-medium">${(order.quantity * 129.99).toFixed(2)}</span></div>
+                  <div className="text-gray-600 ">Total Price: <span className="text-gray-800 font-bold">${(order.price * order.quantity).toFixed(2)}</span></div>
                 </div>
               </div>
             ))

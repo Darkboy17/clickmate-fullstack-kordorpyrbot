@@ -4,7 +4,7 @@ import { useSocket } from '../context/SocketContext';
 
 // This component is responsible for rendering the order button and handling the order process.
 // It allows the user to enter their name and quantity of the product they want to order.
-const OrderButton = ({ productId, productName }) => {
+const OrderButton = ({ productId }) => {
 
   // Importing the socket from the SocketContext to handle real-time events.
   const { socket } = useSocket();
@@ -101,8 +101,8 @@ const OrderButton = ({ productId, productName }) => {
                 <input
                   type="number"
                   min="1"
-                  value={quantity}
-                  onChange={(e) => setQuantity(parseInt(e.target.value))}
+                  value={quantity || ''}
+                  onChange={(e) => setQuantity(parseInt(e.target.value, 10))}
                   className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-amber-500 focus:border-amber-500 bg-white"
                 />
               </div>

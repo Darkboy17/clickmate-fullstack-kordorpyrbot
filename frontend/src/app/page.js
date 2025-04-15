@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect } from 'react';
-
-import React from 'react';
+import React, {useState} from 'react';
 import Head from 'next/head';
 import { SocketProvider } from './context/SocketContext';
 import ChatPanel from './components/ChatPanel';
@@ -50,15 +48,13 @@ const products = [
 
 export default function Home() {
 
-  useEffect(() => {
-    console.log('API URL:', process.env.NEXT_PUBLIC_API_URL);
-  }, []);
+  const [isSellerMode, setIsSellerMode] = useState(false); // State to track seller mode
 
   return (
 
     <SocketProvider>
 
-<div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200">
+      <div className="min-h-screen bg-gradient-to-b from-gray-100 to-gray-200 flex justify-center">
         <div className="container mx-auto px-6 py-6 max-w-5xl">
 
           <Head>
@@ -84,8 +80,8 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             {/* Product listing column */}
-
-            <div className="lg:col-span-2 space-y-6 overflow-y-auto max-h-[80vh]">
+            {!isSellerMode && (
+              <div className="lg:col-span-2 space-y-6 overflow-y-auto max-h-[80vh]">
 
               {products.map((product) => (
 
@@ -119,13 +115,15 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            )}
+            
 
 
             {/* Right sidebar with chat and notifications */}
 
-            <div className="lg:col-span-1 space-y-6">
+            <div className={`${isSellerMode ? "lg:col-span-4" : "lg:col-span-1"} space-y-6`}>
 
-              <OrderNotifications />
+              <OrderNotifications products={products} onSellerModeChange={setIsSellerMode} />
 
               <ChatPanel />
 
