@@ -20,7 +20,7 @@ import { Server, Socket } from 'socket.io';
       'http://localhost:3001',
 
       'https://clickmate-fullstack-kordorpyrbot.vercel.app',
-      
+
       'https://clickmate-fullstack-kordorpyrbot-git-master-darkboy17s-projects.vercel.app',
 
       'https://clickmate-fullstack-kordorpyrbot-git-master-darkboy17s-projects.vercel.app',

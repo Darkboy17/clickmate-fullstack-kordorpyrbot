@@ -110,7 +110,12 @@ const OrderNotifications = ( {products, onSellerModeChange} ) => {
                 <div className="flex justify-between">
                   <span className="font-medium text-gray-800">Order #{order.id}</span>
                   <span className="text-sm text-gray-500">
-                    {new Date(order.createdAt).toLocaleTimeString()}
+                    {new Date(order.createdAt).toLocaleString('en-US', {
+                      timeZone: 'Asia/Kolkata',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                      second: '2-digit',
+                    })}
                   </span>
                 </div>
                 <div className="mt-2 grid grid-cols-2 gap-2 text-sm">

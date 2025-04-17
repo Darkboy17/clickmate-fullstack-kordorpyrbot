@@ -2,7 +2,7 @@ import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { config } from 'dotenv';
 
-import { Logger } from '@nestjs/common';
+import { INestApplication, Logger } from '@nestjs/common';
 
 
 // Load environment variables from .env file
@@ -41,7 +41,6 @@ if (dbEnvironment === 'remote') {
 
 }
 
-
 // Log connection attempt
 logger.log(`Attempting to connect to MySQL at ${dbHost}`);
 
@@ -65,6 +64,8 @@ export const databaseConfig: TypeOrmModuleOptions = {
 
   synchronize: true, // Not be used in production
 
+  timezone: 'Z', // Use UTC timezone
+
   logging: false,
 
   connectTimeout: 30000,
@@ -78,7 +79,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
 };
 
 // Function to initialize database connection with success message
-export const initializeDatabase = async (app) => {
+export const initializeDatabase = async (app: INestApplication<any>) => {
   try {
     const connection = app.get('TypeOrmModuleOptions');
     if (connection.isConnected) {
