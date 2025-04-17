@@ -86,7 +86,7 @@ npm install
 ```bash
 npm run dev
 ```
-> *Note: May run on port 3001 or someting else, since backend is running on port 3000 by default.*
+> *Note: May run on port 3001 or some other random port, since backend is running on port 3000 by default.*
 
 - Runs on **http://localhost:3001**
 
