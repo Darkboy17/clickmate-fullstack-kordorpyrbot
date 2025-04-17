@@ -38,28 +38,28 @@ cd clickmate-fullstack-kordorpyrbot
 > For a quick setup on Windows, the quickest thing you can do is simply *cd* into the 'frontend' folder. Then, create a `.env` file in the root directory and paste the following.
 
 ```bash
-	NEXT_PUBLIC_API_URL=https://clickmateapi.duckdns.org
+NEXT_PUBLIC_API_URL=https://clickmateapi.duckdns.org
 ```
 >*https://clickmateapi.duckdns.org* is a link to quickly access the API without any setup on your local machine. I deployed the API for easier access since the assessment requires only a deployed link of the frontend on vercel and connect to the MySQL locally. This solves the problem of not having MySQL installed on your local machine.
 
 > But, if you want to connect locally, change the .env file to this:
 ```bash
-	NEXT_PUBLIC_API_URL=https://localhost:3000
+NEXT_PUBLIC_API_URL=https://localhost:3000
 ```
 
 > Then cd into the backend folder and similarly, create a `.env` file in the root directory and paste the following:
 ```bash
-	DB_ENV=local
+DB_ENV=local
 
-	LOCAL_DB_USERNAME='your_username'
+LOCAL_DB_USERNAME='your_username'
 
-	LOCAL_DB_PASSWORD='your_password'
+LOCAL_DB_PASSWORD='your_password'
 
-	LOCAL_DB_HOST=localhost	  
+LOCAL_DB_HOST=localhost	  
 
-	DB_PORT=3306
+DB_PORT=3306
 
-	DB_NAME=queenlive
+DB_NAME=queenlive
 ```
 
 The `DB_NAME` assumes you already have created a database name called *queenlive*. You can point it to a database name of your choice. For the sake of this assessment, I have named it *queenlive* for relevancy.
@@ -131,7 +131,7 @@ clickmate-fullstack-kordorpyrbot/
 ```json
 {
   "productId": 101,
-  "buyer": "John Doe",
+  "buyer": "Jane",
   "quantity": 1
 }
 ```
