@@ -142,8 +142,9 @@ clickmate-fullstack-kordorpyrbot/
 | Event | Direction | Description |
 |-------|-----------|-------------|
 | `chat-message	` | Client ↔ Server | Send a chat message |
-| `placeOrder` | Client → Server | Submit an order |
 | `sellers` | Client | Join as a seller |
+| `new-order` | Client → Server | Submit an order |
+| `seller-count` | Server → Client | Get the number of Sellers |
 
 ---
 
