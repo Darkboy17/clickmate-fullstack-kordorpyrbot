@@ -141,7 +141,7 @@ clickmate-fullstack-kordorpyrbot/
 ## **🔗 Socket.IO Events**
 | Event | Direction | Description |
 |-------|-----------|-------------|
-| `chat-message	` | Client → Server | Send a chat message |
+| `chat-message	` | Client ↔ Server | Send a chat message |
 | `placeOrder` | Client → Server | Submit an order |
 
 ---
