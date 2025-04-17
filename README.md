@@ -20,7 +20,7 @@ This project simulates a **real-time live commerce platform** with:
 
 ---
 
-## **🛠 Local Setup & Installation**
+## **🛠 Setup & Installation**
 
 ### **Prerequisites**
 - Node.js (v16+)
