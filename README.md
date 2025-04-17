@@ -143,6 +143,7 @@ clickmate-fullstack-kordorpyrbot/
 |-------|-----------|-------------|
 | `chat-message	` | Client ↔ Server | Send a chat message |
 | `placeOrder` | Client → Server | Submit an order |
+| `sellers` | Client | Join as a seller |
 
 ---
 
